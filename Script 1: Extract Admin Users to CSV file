@@ -1,0 +1,11 @@
+# Import Active Directory module
+Import-Module ActiveDirectory
+
+# Set output file path
+$outputFile = "C:\AdminUsers.csv"
+
+# Query for admin users
+$adminUsers = Get-ADUser -Filter {(memberOf -RecursiveMatch 'CN=Administrators,CN=Builtin,DC=yourdomain,DC=com') -and (Enabled -eq $true)} -Properties DisplayName, EmailAddress, Enabled
+
+# Export results to CSV file
+$adminUsers | Select-Object DisplayName, EmailAddress, Enabled | Export-CSV $outputFile -NoTypeInformation
