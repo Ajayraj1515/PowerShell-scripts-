@@ -1,0 +1,14 @@
+Script 1:
+
+In script 1, we first import the Active Directory module, which allows us to query for user objects in Active Directory. 
+We then set the output file path where the results will be saved. We query for all admin users by using the Get-ADUser cmdlet 
+and filtering for users who are members of the built-in Administrators group and are currently enabled. We select the desired 
+properties for the output file and export the results to a CSV file using the Export-CSV cmdlet.
+
+Script 2:
+
+In script 2, we import the Azure Active Directory module, which allows us to query for user objects in Azure Active Directory.
+We set the input file path where the results from script 1 are saved. We read the CSV file using the Import-CSV cmdlet and loop 
+through each admin user using a foreach loop. For each user, we extract their email address and use the Get-AzureADUserAuthenticationMethod
+cmdlet to query for their authentication methods. We then filter the results to find if multifactor authentication is enabled for the user.
+If it is, we output a message saying so. If not, we output a message indicating that MFA is not enabled.
