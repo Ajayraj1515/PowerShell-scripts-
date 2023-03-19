@@ -1,0 +1,21 @@
+# Import Azure Active Directory module
+Import-Module AzureAD
+
+# Set input file path
+$inputFile = "C:\AdminUsers.csv"
+
+# Read CSV file
+$adminUsers = Import-CSV $inputFile
+
+# Loop through each admin user and check for multifactor authentication
+foreach ($user in $adminUsers) {
+    $email = $user.EmailAddress
+    $authMethods = Get-AzureADUserAuthenticationMethod -ObjectId $email
+    $mfaEnabled = $authMethods | Where-Object {$_.AuthType -eq "AuthenticationMethodType'AuthenticationPhone'" -and $_.State -eq "Enabled"}
+
+    if ($mfaEnabled) {
+        Write-Host "$email has MFA enabled"
+    } else {
+        Write-Host "$email does not have MFA enabled"
+    }
+}
