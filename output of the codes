@@ -1,0 +1,5 @@
+The output of the first PowerShell script will be a CSV file containing information about all admin users who are members 
+of the built-in Administrators group and currently enabled. The file will be saved to a predetermined location on the system.
+
+The output of the second PowerShell script will be a list of admin users and whether they have multifactor authentication enabled or not.
+This information will be displayed in the PowerShell console. If desired, the output can be piped to a file or exported to another CSV file for further processing.
